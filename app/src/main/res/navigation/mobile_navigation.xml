@@ -7,19 +7,19 @@
 
     <fragment
         android:id="@+id/navigation_home"
-        android:name="com.jabirdev.youtubeapikotlin.ui.home.HomeFragment"
-        android:label="@string/title_home"
-        tools:layout="@layout/fragment_home" />
+        android:name="com.jabirdev.youtubeapikotlin.ui.video.VideoFragment"
+        android:label="@string/title_video"
+        tools:layout="@layout/fragment_video" />
 
     <fragment
         android:id="@+id/navigation_dashboard"
-        android:name="com.jabirdev.youtubeapikotlin.ui.dashboard.DashboardFragment"
-        android:label="@string/title_dashboard"
-        tools:layout="@layout/fragment_dashboard" />
+        android:name="com.jabirdev.youtubeapikotlin.ui.playlist.PlaylistFragment"
+        android:label="@string/title_playlist"
+        tools:layout="@layout/fragment_playlist" />
 
     <fragment
         android:id="@+id/navigation_notifications"
-        android:name="com.jabirdev.youtubeapikotlin.ui.notifications.NotificationsFragment"
-        android:label="@string/title_notifications"
-        tools:layout="@layout/fragment_notifications" />
+        android:name="com.jabirdev.youtubeapikotlin.ui.channel.ChannelFragment"
+        android:label="@string/title_channel"
+        tools:layout="@layout/fragment_channel" />
 </navigation>

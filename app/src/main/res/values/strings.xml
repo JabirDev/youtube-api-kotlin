@@ -1,6 +1,8 @@
 <resources>
     <string name="app_name">Youtube API Kotlin</string>
-    <string name="title_home">Home</string>
-    <string name="title_dashboard">Dashboard</string>
-    <string name="title_notifications">Notifications</string>
+    <string name="title_video">Video</string>
+    <string name="title_playlist">Playlist</string>
+    <string name="title_channel">Channel</string>
+    <string name="image_channel">Image Channel</string>
+    <string name="logo_channel">Logo Channel</string>
 </resources>

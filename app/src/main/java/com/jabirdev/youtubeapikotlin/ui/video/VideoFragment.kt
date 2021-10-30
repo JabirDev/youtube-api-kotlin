@@ -8,28 +8,41 @@ import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.jabirdev.youtubeapikotlin.R
+import com.jabirdev.youtubeapikotlin.adapter.VideoAdapter
+import com.jabirdev.youtubeapikotlin.databinding.FragmentVideoBinding
+import java.lang.StringBuilder
 
 class VideoFragment : Fragment() {
 
-    private lateinit var videoViewModel: VideoViewModel
+    private var _binding: FragmentVideoBinding? = null
+    private val binding get() = _binding!!
+    private var videoViewModel: VideoViewModel? = null
+    private val adapter = VideoAdapter()
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        binding.rvVideo.adapter = adapter
+        binding.rvVideo.layoutManager = LinearLayoutManager(requireContext())
+
+        videoViewModel?.video?.observe(viewLifecycleOwner, {
+            if (it != null && it.items.isNotEmpty()){
+                adapter.setData(it.items)
+            }
+        })
+
+    }
 
     override fun onCreateView(
             inflater: LayoutInflater,
             container: ViewGroup?,
             savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         videoViewModel =
                 ViewModelProvider(this).get(VideoViewModel::class.java)
-        val root = inflater.inflate(R.layout.fragment_video, container, false)
-        val textView: TextView = root.findViewById(R.id.text_home)
-        videoViewModel.channel.observe(viewLifecycleOwner, Observer {
-            if (it != null && it.items.isNotEmpty()){
-                it.items.forEach {  channel ->
-                    textView.text = channel.snippet.title
-                }
-            }
-        })
-        return root
+        _binding = FragmentVideoBinding.inflate(inflater, container, false)
+        return binding.root
     }
 }

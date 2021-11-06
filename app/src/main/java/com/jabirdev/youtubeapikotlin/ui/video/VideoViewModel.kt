@@ -16,23 +16,33 @@ class VideoViewModel : ViewModel() {
     val video = _video
     private val _isLoading = MutableLiveData<Boolean>()
     val isLoading = _isLoading
+    private val _isAllVideoLoaded = MutableLiveData<Boolean>()
+    val isAllVideoLoaded = _isAllVideoLoaded
     private val _message = MutableLiveData<String>()
     val message = _message
+    private var nextPageToken: String? = null
 
     init {
         getVideoList()
     }
 
-    private fun getVideoList(){
+    fun getVideoList(){
         _isLoading.value = true
-        val client = ApiConfig.getService().getVideo("snippet", "UCkXmLjEr95LVtGuIm3l2dPg", "date")
+        val client = ApiConfig.getService().getVideo("snippet", "UCkXmLjEr95LVtGuIm3l2dPg", "date", nextPageToken)
         client.enqueue(object : Callback<VideoYtModel>{
             override fun onResponse(call: Call<VideoYtModel>, response: Response<VideoYtModel>) {
                 _isLoading.value = false
                 if (response.isSuccessful){
                     val data = response.body()
-                    if (data != null && data.items.isNotEmpty()){
-                        _video.value = data
+                    if (data != null){
+                        if (data.nextPageToken != null){
+                            nextPageToken = data.nextPageToken
+                        } else {
+                            _isAllVideoLoaded.value = true
+                        }
+                        if (data.items.isNotEmpty()){
+                            _video.value = data
+                        }
                     } else {
                         _message.value = "No video"
                     }

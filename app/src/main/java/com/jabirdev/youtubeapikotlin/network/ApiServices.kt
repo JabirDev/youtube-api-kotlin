@@ -18,7 +18,8 @@ interface ApiServices {
     fun getVideo(
         @Query("part") part: String,
         @Query("channelId") channelId: String,
-        @Query("order") order: String
+        @Query("order") order: String,
+        @Query("pageToken") pageToken: String?
     ) : Call<VideoYtModel>
 
 }

@@ -19,7 +19,8 @@ interface ApiServices {
         @Query("part") part: String,
         @Query("channelId") channelId: String,
         @Query("order") order: String,
-        @Query("pageToken") pageToken: String?
+        @Query("pageToken") pageToken: String?,
+        @Query("q") query: String?
     ) : Call<VideoYtModel>
 
 }

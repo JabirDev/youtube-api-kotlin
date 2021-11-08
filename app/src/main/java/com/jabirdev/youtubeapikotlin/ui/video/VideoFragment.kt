@@ -1,12 +1,13 @@
 package com.jabirdev.youtubeapikotlin.ui.video
 
+import android.app.SearchManager
+import android.content.Context
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import android.widget.AbsListView
 import android.widget.TextView
 import android.widget.Toast
+import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -82,6 +83,11 @@ class VideoFragment : Fragment() {
 
     }
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setHasOptionsMenu(true)
+    }
+
     override fun onCreateView(
             inflater: LayoutInflater,
             container: ViewGroup?,
@@ -92,4 +98,34 @@ class VideoFragment : Fragment() {
         _binding = FragmentVideoBinding.inflate(inflater, container, false)
         return binding.root
     }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        val searchManager = requireActivity().getSystemService(Context.SEARCH_SERVICE) as SearchManager
+        val searchView = menu.findItem(R.id.menu_search).actionView as SearchView
+        searchView.setSearchableInfo(searchManager.getSearchableInfo(requireActivity().componentName))
+        searchView.queryHint = resources.getString(R.string.search_video)
+        searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(q: String): Boolean {
+                if (q.isNotEmpty()){
+                    videoViewModel?.querySearch = q
+                    videoViewModel?.nextPageToken = null
+                    adapter.clearAll()
+                    videoViewModel?.getVideoList()
+                }
+                return true
+            }
+
+            override fun onQueryTextChange(newText: String): Boolean {
+                if (newText.isEmpty()){
+                    videoViewModel?.querySearch = null
+                    videoViewModel?.nextPageToken = null
+                    adapter.clearAll()
+                    videoViewModel?.getVideoList()
+                }
+                return false
+            }
+        })
+        super.onCreateOptionsMenu(menu, inflater)
+    }
+
 }

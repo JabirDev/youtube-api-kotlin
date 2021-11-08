@@ -58,4 +58,9 @@ class VideoAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
         rv.scrollToPosition(oldItems.size - newList.size)
     }
 
+    fun clearAll(){
+        oldItems.clear()
+        notifyDataSetChanged()
+    }
+
 }

@@ -6,4 +6,5 @@
     <string name="image_channel">Image Channel</string>
     <string name="logo_channel">Logo Channel</string>
     <string name="video_thumbnail">Video Thumbnail</string>
+    <string name="search_video">Search Video</string>
 </resources>

@@ -1,10 +1,12 @@
 package com.jabirdev.youtubeapikotlin.adapter
 
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.jabirdev.youtubeapikotlin.activities.PlayerActivity
 import com.jabirdev.youtubeapikotlin.databinding.ItemVideoBinding
 import com.jabirdev.youtubeapikotlin.diffutils.VideoDiffUtil
 import com.jabirdev.youtubeapikotlin.model.VideoYtModel
@@ -17,6 +19,15 @@ class VideoAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
         private val binding = itemView
 
         fun setData(data: VideoYtModel.VideoItem){
+
+            binding.root.setOnClickListener {
+                val i = Intent(it.context, PlayerActivity::class.java)
+                i.putExtra("video_id", data.videoId.id)
+                i.putExtra("video_title", data.snippetYt.title)
+                i.putExtra("video_description", data.snippetYt.description)
+                it.context.startActivity(i)
+            }
+
             binding.tvVideoTitle.text = data.snippetYt.title
             binding.tvPublished.text = data.snippetYt.publishedAt
             Glide.with(binding.root)

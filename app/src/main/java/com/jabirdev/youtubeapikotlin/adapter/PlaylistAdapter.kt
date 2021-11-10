@@ -1,10 +1,12 @@
 package com.jabirdev.youtubeapikotlin.adapter
 
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.jabirdev.youtubeapikotlin.activities.PlaylistItemActivity
 import com.jabirdev.youtubeapikotlin.databinding.ItemPlaylistBinding
 import com.jabirdev.youtubeapikotlin.diffutils.PlaylistDiffUtil
 import com.jabirdev.youtubeapikotlin.model.PlaylistYtModel
@@ -18,6 +20,12 @@ class PlaylistAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
         private val binding = itemView
 
         fun setData(data: PlaylistYtModel.PlaylistItem){
+            binding.root.setOnClickListener {
+                val i = Intent(it.context, PlaylistItemActivity::class.java)
+                i.putExtra("playlist_id", data.id)
+                it.context.startActivity(i)
+            }
+
             binding.tvPlaylistTitle.text = data.snippetYt.title
             val videoCount = "${data.contentDetail.itemCount} videos"
             binding.tvVideoCount.text = videoCount

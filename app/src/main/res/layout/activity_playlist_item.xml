@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".activities.PlayerActivity">
+    tools:context=".activities.PlaylistItemActivity">
 
     <com.pierfrancescosoffritti.androidyoutubeplayer.core.player.views.YouTubePlayerView
         android:id="@+id/youtube_player"
@@ -29,12 +29,36 @@
     <com.google.android.material.textview.MaterialTextView
         android:id="@+id/tv_video_description"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
         android:layout_marginTop="8dp"
+        android:layout_marginBottom="16dp"
         android:textAppearance="@style/TextAppearance.MaterialComponents.Caption"
+        tools:text="@tools:sample/lorem/random"
         app:layout_constraintStart_toStartOf="@+id/tv_video_title"
         app:layout_constraintEnd_toEndOf="@+id/tv_video_title"
         app:layout_constraintTop_toBottomOf="@+id/tv_video_title"
-        tools:text="@tools:sample/lorem/random"/>
+        app:layout_constraintBottom_toTopOf="@+id/rv_playlist"/>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_playlist"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingEnd="16dp"
+        android:paddingStart="0dp"
+        android:clipToPadding="false"
+        android:layout_marginBottom="8dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+    <ProgressBar
+        android:id="@+id/progressBar"
+        style="?android:attr/progressBarStyleHorizontal"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:indeterminate="true"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

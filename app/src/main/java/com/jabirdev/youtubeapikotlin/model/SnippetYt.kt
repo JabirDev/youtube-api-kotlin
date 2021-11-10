@@ -20,7 +20,7 @@ data class SnippetYt(
     @SerializedName("thumbnails")
     val thumbnails: ThumbnailsYt,
 
-    @SerializedName("country")
-    val country: String
+    @SerializedName("position")
+    val country: Int?
 
 )

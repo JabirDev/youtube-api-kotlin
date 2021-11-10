@@ -11,7 +11,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.YoutubeAPIKotlin">
-        <activity android:name=".activities.PlayerActivity"></activity>
+        <activity android:name=".activities.PlaylistItemActivity"></activity>
+        <activity android:name=".activities.PlayerActivity" />
         <activity
             android:name=".activities.MainActivity"
             android:label="@string/app_name">

@@ -26,7 +26,11 @@ data class PlaylistYtModel(
 
     data class ContentDetail(
         @SerializedName("itemCount")
-        val itemCount: Int
+        val itemCount: Int?,
+
+        @SerializedName("videoId")
+        val videoId: String?
+
     )
 
 }

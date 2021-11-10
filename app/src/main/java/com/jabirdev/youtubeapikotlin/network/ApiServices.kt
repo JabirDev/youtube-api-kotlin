@@ -1,6 +1,7 @@
 package com.jabirdev.youtubeapikotlin.network
 
 import com.jabirdev.youtubeapikotlin.model.ChannelModel
+import com.jabirdev.youtubeapikotlin.model.PlaylistItemsModel
 import com.jabirdev.youtubeapikotlin.model.PlaylistYtModel
 import com.jabirdev.youtubeapikotlin.model.VideoYtModel
 import retrofit2.Call
@@ -31,5 +32,12 @@ interface ApiServices {
         @Query("maxResults") maxResults: String,
         @Query("pageToken") pageToken: String?
     ) : Call<PlaylistYtModel>
+
+    @GET("playlistItems")
+    fun getPlaylistItems(
+        @Query("part") part: String,
+        @Query("playlistId") playlist: String,
+        @Query("pageToken") pageToken: String?
+    ) : Call<PlaylistItemsModel>
 
 }
